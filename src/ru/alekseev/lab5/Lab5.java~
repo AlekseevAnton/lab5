@@ -1,0 +1,83 @@
+package ru.alekseev.lab4;
+
+import java.io.*;
+import java.util.*;
+
+public class Lab4 {
+ 
+    private static List<Point> list;
+    
+    private static void init(){ // создание и заполнение списка
+        list=new ArrayList<Point>();
+        list.add(new Point(3,-4));
+        list.add(new Triangle(-2,4,3,2,-3,8));
+        list.add(new Rectangle(1,5,1,4,3,6,8,7));
+        list.add(new Point(5,2));
+        list.add(new Vector(3,4,-2,5));
+        list.add(new Triangle(5,4,3,6,3,2));
+        list.add(new Rectangle(1,-4,1,4,1,6,8,9));
+        list.add(new Point(6,2));
+        list.add(new Vector(7,5,-8,1));
+        list.add(new Point(6,6));
+       
+    }
+    
+    
+public static void main(String[] args)throws IOException   {
+  init();
+  // подготовка к вводу
+  InputStreamReader isr = new InputStreamReader(System.in);
+  BufferedReader br = new BufferedReader(isr);
+  for(;;){ // начинаем бесконечный цикл
+        System.out.println();
+        System.out.println("Выберите тип сортировки (выйти - пустая строка):");
+        System.out.println("--------------------------------------------------");
+        System.out.println("1 - по возраcтанию id");
+        System.out.println("2 - по убыванию id");
+        System.out.println("3 - по возраcтанию имени");
+        System.out.println("4 - по убыванию имени");
+        System.out.println("5 - по возрастанию количества дополнительных точек");
+        System.out.println("6 - по убыванию количества дополнительных точек");
+        System.out.println("7 - выполнить симметрию");
+        System.out.println("8 - выполнить перенос");
+        System.out.println("--------------------------------------------------");
+
+        String mode = br.readLine(); // читаем строку из буфера ввода
+        if (mode.isEmpty()) break; // прерываем цикл, если строка пустая
+        boolean sortUp=false;
+        int sortMode=0;
+        switch(Integer.parseInt(mode)){
+                case 1:{sortUp=false; sortMode=0; break;}
+                case 2:{sortUp=true; sortMode=0; break;}
+                case 3:{sortUp=false; sortMode=1; break;}
+                case 4:{sortUp=true; sortMode=1; break;}
+                case 5:{sortUp=false; sortMode=2; break;}
+                case 6:{sortUp=true; sortMode=2; break;}
+                case 7:{System.out.println("\nВведите id объекта,который нужно отобразить симметрично:");
+                          Scanner sc = new Scanner(System.in);
+                          int id = sc.nextInt();
+                          list.get(id-1).doSymmetry();
+                          break;
+                }
+                case 8:{System.out.println("\nВведите id объекта,который нужно перенести:");
+                          Scanner sc = new Scanner(System.in);
+                          
+                                int id = sc.nextInt();
+                                System.out.println("\nВведите координату X новой точки:");                                    
+                                int x = sc.nextInt();
+                                System.out.println("\nВведите координату Y новой точки:");                                    
+                                int y = sc.nextInt();
+                                NewPoint np=new NewPoint(x,y);
+                                list.get(id-1).doTranslation(np);
+                                break;
+                            
+                         
+                }
+        }
+        Collections.sort(list,new SortMode(sortUp,sortMode));
+        for(Point p:list){
+            System.out.println(p);
+        }
+  }
+}
+}

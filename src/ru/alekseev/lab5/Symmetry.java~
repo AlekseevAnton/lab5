@@ -1,0 +1,5 @@
+package ru.alekseev.lab4;
+
+public interface Symmetry {
+    void doSymmetry();
+}

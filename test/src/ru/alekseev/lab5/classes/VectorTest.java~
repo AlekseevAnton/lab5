@@ -1,0 +1,22 @@
+package src.ru.alekseev.lab5.classes;
+
+import org.junit.Test;
+import static org.junit.Assert.*;
+import ru.alekseev.lab4.Vector;
+
+public class VectorTest {
+
+  @Test
+  public void testGetX() {
+    System.out.println("Проверка метода getX()");
+    Vector v = new Vector(3,4,1,2);
+    assertEquals(3, v.getX(),0.00001);
+  }
+  
+  @Test
+  public void testGetY() {
+    System.out.println("Проверка метода getY()");
+    Vector v = new Vector(3,4,1,2);
+    assertEquals(4, v.getY(),0.00001);
+  }
+}

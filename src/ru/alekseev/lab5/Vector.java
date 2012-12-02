@@ -1,0 +1,31 @@
+package ru.alekseev.lab5;
+
+public class Vector extends Point {
+    private double x1;
+    private double y1;
+    public Vector(double x, double y, double x1, double y1){
+        super(x,y);
+        this.x1=x1;
+        this.y1=y1;
+        this.setName("Вектор");
+        this.countSupportPoint=1;
+        
+    }
+    public void doSymmetry(){
+        this.setX(-this.getX());
+        this.setY(-this.getY());
+        x1*=-1;
+        y1*=-1;
+    }
+    public void doTranslation(NewPoint np){
+        
+        x1+=np.getX()-this.getX();
+        y1+=np.getY()-this.getY();
+        this.setX(np.getX());
+        this.setY(np.getY());
+        
+    }
+    public String toString(){
+        return "id="+getId()+"  "+getName()+"("+this.getX()+";"+this.getY()+")"+"("+x1+";"+y1+")";
+    }
+}
